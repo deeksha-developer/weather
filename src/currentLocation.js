@@ -4,39 +4,10 @@ import Clock from "react-live-clock";
 // import Forcast from "./forcast";
 // import loader from "./images/WeatherIcons.gif";
 import ReactAnimatedWeather from "react-animated-weather";
+import { dateBuilder } from "./component/constants";
 
-const dateBuilder = (d) => {
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-  const days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
 
-  const day = days[d.getDay()];
-  const date = d.getDate();
-  const month = months[d.getMonth()];
-  const year = d.getFullYear();
-
-  return `${day}, ${date} ${month} ${year}`;
-};
+const currentDate = dateBuilder(new Date());
 
 const defaults = {
   color: "black",
@@ -60,7 +31,6 @@ const Weather = () => {
     sunset: undefined,
     errorMsg: undefined,
   });
-console.log(setState);
 
   const getWeather = useCallback(async (lat, lon) => {
     try {
@@ -121,7 +91,7 @@ console.log(setState);
       navigator.geolocation.getCurrentPosition(resolve, reject);
     });
   };
-  console.log("getPosition", getPosition);
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -161,7 +131,6 @@ console.log(setState);
               <h3>{state.country}</h3>
             </div>
             <div className="mb-icon">
-              {" "}
               <ReactAnimatedWeather
                 icon={state.icon}
                 color={defaults.color}
@@ -176,7 +145,7 @@ console.log(setState);
                 <div className="current-time">
                   <Clock format="HH:mm:ss" interval={1000} ticking={true} />
                 </div>
-                <div className="current-date">{dateBuilder(new Date())}</div>
+                <div className="current-date">{currentDate}</div>
               </div>
               <div className="temperature">
                 <p>

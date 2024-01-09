@@ -1,3 +1,4 @@
+export const dateBuilder = (d) => {
 const months = [
     "January",
     "February",
@@ -21,8 +22,8 @@ const months = [
     "Friday",
     "Saturday",
   ];
-  
-  export const dateBuilder = (d) => {
+
+ 
     const day = days[d.getDay()];
     const date = d.getDate();
     const month = months[d.getMonth()];
